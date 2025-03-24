@@ -4,6 +4,8 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const loginRouter = require("./src/routes/loginRouter.js");
 const connectDB = require("./src/mongoDB/connectDB.js");
+const cors = require("cors");
+
 const app = express();
 
 dotenv.config();

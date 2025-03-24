@@ -45,7 +45,7 @@ const Login = () => {
       return;
     }
     axios
-      .post("/api/login/sendPassword", { email })
+      .post(`${import.meta.env.VITE_BACKEND_URL}/api/login/sendPassword`, { email })
       .then((response) => {
         console.log(response.data);
       // If yes, show an error message
@@ -71,7 +71,7 @@ const Login = () => {
 
     // Perform login logic here
     axios
-      .post("/api/login/verifyPassword", { email, password })
+      .post(`${import.meta.env.VITE_BACKEND_URL}/api/login/verifyPassword`, { email, password })
       .then((response) => {
         console.log("response for login", response);
         if (response.data) {
