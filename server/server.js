@@ -15,13 +15,14 @@ app.get('/', (req, res) => {
 })
 
 const corsOptions = {
-    origin: 'https://login-task-g08s.onrender.com', // Allow requests from your frontend
-    methods: 'GET, POST, PUT, DELETE',
-    allowedHeaders: 'Content-Type, Authorization',
-    credentials: true, // Allow cookies and credentials (if required)
-  };
-  
-  app.use(cors(corsOptions));
+  origin: 'https://login-task-g08s.onrender.com', // Explicitly allow your frontend origin
+  methods: 'GET, POST, PUT, DELETE',
+  allowedHeaders: 'Content-Type, Authorization',
+  credentials: true, // Allow cookies and credentials (if required)
+};
+
+app.use(cors(corsOptions));
+
   
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
