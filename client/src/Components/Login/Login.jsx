@@ -44,7 +44,7 @@ const Login = () => {
       return;
     }
     axios
-      .post("/api/login/sendPassword", { email })
+      .post("https://login-task-api.onrender.com/api/login/sendPassword", { email })
       .then((response) => {
         console.log(response.data);
         setForgotPasswordClicked(true); // Show success message after sending password reset
@@ -64,7 +64,7 @@ const Login = () => {
 
     // Perform login logic here
     axios
-      .post("/api/login/verifyPassword", { email, password })
+      .post("https://login-task-api.onrender.com/api/login/verifyPassword", { email, password })
       .then((response) => {
         console.log("response for login", response);
         if (response.data) {
@@ -74,6 +74,8 @@ const Login = () => {
             localStorage.setItem("userEmail", email);
           navigate("/dashboard"); // Redirect to homepage or dashboard
           toast.success("Login successful!");
+          setEmail("");
+          setPassword("");
         }
       })
       .catch((error) => {
