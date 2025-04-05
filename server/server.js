@@ -14,8 +14,9 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
+const allowedOrigins = ['https://login-task-g08s.onrender.com', 'http://localhost:3000'];
 const corsOptions = {
-  origin: 'https://login-task-g08s.onrender.com', // Explicitly allow your frontend origin
+  origin: allowedOrigins, // Explicitly allow your frontend origin
   methods: 'GET, POST, PUT, DELETE',
   allowedHeaders: 'Content-Type, Authorization',
   credentials: true, // Allow cookies and credentials (if required)
