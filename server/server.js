@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
 })
 
 const corsOptions = {
-    origin: '*', // Allow requests from your frontend
+    origin: 'https://login-task-g08s.onrender.com', // Allow requests from your frontend
     methods: 'GET, POST, PUT, DELETE',
     allowedHeaders: 'Content-Type, Authorization',
     credentials: true, // Allow cookies and credentials (if required)
