@@ -11,6 +11,7 @@ const Login = () => {
   const [errors, setErrors] = useState({ email: "", password: "" });
   const [forgotPasswordClicked, setForgotPasswordClicked] = useState(false);
   const navigate = useNavigate();
+   console.log(import.meta.env.VITE_BACKEND_URL);
    
   // Validate email and password fields
   const validateForm = () => {
@@ -44,7 +45,7 @@ const Login = () => {
       return;
     }
     axios
-      .post("https://login-task-api.onrender.com/api/login/sendPassword", { email })
+      .post(`${import.meta.env.VITE_BACKEND_URL}/api/login/sendPassword`, { email })
       .then((response) => {
         console.log(response.data);
         setForgotPasswordClicked(true); // Show success message after sending password reset
@@ -64,7 +65,7 @@ const Login = () => {
 
     // Perform login logic here
     axios
-      .post("https://login-task-api.onrender.com/api/login/verifyPassword", { email, password })
+      .post(`${import.meta.env.VITE_BACKEND_URL}/api/login/verifyPassword`, { email, password })
       .then((response) => {
         console.log("response for login", response);
         if (response.data) {

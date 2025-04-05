@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
 })
 
 const corsOptions = {
-    origin: 'http://localhost:3000', // Allow requests from your frontend
+    origin: '*', // Allow requests from your frontend
     methods: 'GET, POST, PUT, DELETE',
     allowedHeaders: 'Content-Type, Authorization',
     credentials: true, // Allow cookies and credentials (if required)
