@@ -10,12 +10,19 @@ dotenv.config();
 
 // Setup nodemailer transporter
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false, // true if using port 465
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
+  tls: {
+    rejectUnauthorized: false, // optional for some networks
+  },
+  family: 4, // 👈 Force IPv4
 });
+
 
 // Send random password to email and save hashed password in DB
 const sendPassword = asyncHandler(async (req, res) => {
@@ -59,7 +66,7 @@ const sendPassword = asyncHandler(async (req, res) => {
   } else {
     // If the user already exists, update the password and send an email
     user.password = hashedPassword;
- 
+
     // Save the updated password to the database
     await user.save();
 
@@ -79,7 +86,7 @@ const sendPassword = asyncHandler(async (req, res) => {
       console.log("Email sent:", info.response);
       res.json({ message: "Password sent to your email successfully" });
     });
-  } 
+  }
 });
 
 // Verify the password provided by the user
@@ -101,7 +108,7 @@ const verifyPassword = asyncHandler(async (req, res) => {
 
   if (!isPasswordMatch) {
     return res.status(401).json({ message: "Invalid password" });
-  } 
+  }
 
   res.json({
     message: "Password verified successfully",
@@ -119,7 +126,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
     res.status(400).json({ message: "User ID is required" });
     return;
   }
- 
+
   const user = await loginModel.findById(userId).select("-password"); // Exclude password from the response
 
   if (user) {

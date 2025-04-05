@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -45,33 +44,27 @@ const Login = () => {
       return;
     }
     axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/api/login/sendPassword`, { email })
+      .post("/api/login/sendPassword", { email })
       .then((response) => {
         console.log(response.data);
-      // If yes, show an error message
         setForgotPasswordClicked(true); // Show success message after sending password reset
         toast.success("Password reset link sent to your email.");
       })
-
-    // Post a request to the server to send a password reset link
       .catch((error) => {
         console.error(error);
         toast.error("Error sending password reset link.");
-        // If the request is successful, show a success message
       });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-        // If the request fails, show an error message
     
     // Validate before submitting
     if (!validateForm()) return;
 
-
     // Perform login logic here
     axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/api/login/verifyPassword`, { email, password })
+      .post("/api/login/verifyPassword", { email, password })
       .then((response) => {
         console.log("response for login", response);
         if (response.data) {
